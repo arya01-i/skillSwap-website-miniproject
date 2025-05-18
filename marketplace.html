@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Marketplace - SkillSwap</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+      <h1>SkillSwap</h1>
+       <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html" id="dashboard-link">Dashboard</a>
+      <a href="marketplace.html" id="marketplace-link" class="active">Marketplace</a>
+      <a href="about.html">About Us</a>
+      <a href="#" id="auth-link">Sign In</a>
+    </nav>
+  </header>
+
+ 
+  <main>
+    <h2 style="text-align:center; margin-top: 1rem;">Marketplace - Swap or Buy Skills</h2>
+    <div class="cards-container" id="marketplace-cards">
+      <!-- Skill cards inserted here by JS -->
+    </div>
+  </main>
+
+  <!-- Swap Modal -->
+  <div id="swap-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" id="swap-close">&times;</span>
+      <div class="modal-header">Swap Skills</div>
+
+      <label for="their-skill-select">Their Skill:</label>
+      <select id="their-skill-select"></select>
+
+      <label for="your-skill-select">Your Skill:</label>
+      <select id="your-skill-select"></select>
+
+      <div id="price-diff-msg" class="price-diff"></div>
+
+      <button id="swap-confirm-btn" style="background:#2196F3; color:#fff; width:100%;">Confirm Swap</button>
+    </div>
+  </div>
+
+  <!-- Buy Modal -->
+  <div id="buy-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" id="buy-close">&times;</span>
+      <div class="modal-header">Buy Skill</div>
+
+      <div id="buy-skill-details"></div>
+
+      <label for="card-number">Card Number:</label>
+      <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" />
+
+      <label for="card-expiry">Expiry Date:</label>
+      <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" />
+
+      <label for="card-cvc">CVC:</label>
+      <input type="number" id="card-cvc" placeholder="123" maxlength="4" />
+
+      <button id="pay-now-btn" style="background:#4CAF50; color:#fff; width:100%;">Pay Now</button>
+
+      <div id="payment-msg" class="pay-success" style="display:none;">Payment successful! Thank you for your purchase.</div>
+    </div>
+  </div>
+
+<footer class="main-footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <h2>SkillSwap</h2>
+      <h3>Exchange skills, empower growth.</h3>
+      <p>123 Skill St, Learning City, Riga</p>
+      <p>Email: <a href="mailto:hello@skillswap.com">hello@skillswap.com</a></p>
+    </div>
+
+    <div class="footer-right">
+    <div class="quick-links">
+        <h3>Quick Links</h3>
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="marketplace.html">Marketplace</a></li>
+        <li><a href="about.html">About Us</a></li>
+        </ul>
+    </div>
+
+    <div class="follow-us">
+        <h3>Follow Us</h3>
+        <ul class="social-links">
+        <li><a href="https://instagram.com/skillswap" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://t.me/skillswap" target="_blank" rel="noopener">Telegram</a></li>
+        <li><a href="https://facebook.com/skillswap" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://twitter.com/skillswap" target="_blank" rel="noopener">Twitter</a></li>
+        </ul>
+    </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 SkillSwap. All rights reserved.</p>
+  </div>
+</footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
