@@ -79,7 +79,7 @@ const marketplaceSkills = [
   {
     id: 101,
     owner: "Alice",
-    photo: "/images/guitar.jpg",
+    photo: "images/guitar.jpg",
     name: "Guitar",
     price: 30,
     desc: "Learn to play acoustic and electric guitar from scratch",
@@ -88,7 +88,7 @@ const marketplaceSkills = [
   {
     id: 102,
     owner: "Charlie",
-    photo: "/images/cooking.jpg",
+    photo: "images/cooking.jpg",
     name: "Cooking",
     price: 35,
     desc: "Master Italian and Mediterranean cooking techniques",
@@ -97,7 +97,7 @@ const marketplaceSkills = [
     {
     id: 103,
     owner: "Fiona",
-    photo: "/images/photography.jpg",
+    photo: "images/photography.jpg",
     name: "Photography Guide (PDF)",
     price: 15,
     desc: "Comprehensive PDF guide",
@@ -106,7 +106,7 @@ const marketplaceSkills = [
   {
     id: 104,
     owner: "Diana",
-    photo: "/images/yoga.jpg",
+    photo: "images/yoga.jpg",
     name: "Yoga",
     price: 20,
     desc: "Hatha and Vinyasa yoga for beginners and intermediates",
@@ -115,7 +115,7 @@ const marketplaceSkills = [
   {
     id: 105,
     owner: "Ethan",
-    photo: "/images/python.jpg",
+    photo: "images/python.jpg",
     name: "Python",
     price: 40,
     desc: "Learn Python programming from basics to advanced",
@@ -124,7 +124,7 @@ const marketplaceSkills = [
     {
     id: 106,
     owner: "Bob",
-    photo: "/images/spanish.jpg",
+    photo: "images/spanish.jpg",
     name: "Spanish",
     price: 25,
     desc: "Beginner to intermediate conversational Spanish course",
@@ -133,7 +133,7 @@ const marketplaceSkills = [
   {
     id: 107,
     owner: "George",
-    photo: "/images/js.jpg",
+    photo: "images/js.jpg",
     name: "30-Day JavaScript Course",
     price: 35,
     desc: "Hands-on JavaScript fundamentals with projects",
@@ -142,7 +142,7 @@ const marketplaceSkills = [
   {
     id: 108,
     owner: "Ian",
-    photo: "/images/socialmedia.jpg",
+    photo: "images/socialmedia.jpg",
     name: "Social Media Strategy",
     price: 45,
     desc: "Create effective social media marketing plans",
