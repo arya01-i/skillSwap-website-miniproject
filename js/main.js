@@ -74,7 +74,6 @@ if (marketplaceLink) {
 }
 
 
-// Dummy other users' skills (would come from DB/api)
 const marketplaceSkills = [
   {
     id: 101,
@@ -157,7 +156,7 @@ if (getStartedBtn) {
   getStartedBtn.addEventListener("click", function () {
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     if (isLoggedIn) {
-      window.location.href = "#details"; // replace with actual section ID
+      window.location.href = "#details";
     } else {
       window.location.href = "signup.html";
     }
@@ -205,7 +204,7 @@ if (dashboardPage) {
     user.exchanged = ["Yoga", "Spanish"];
     user.bought = ["Guitar", "Cooking"];
     user.earnings = 35;
-    localStorage.setItem("user", JSON.stringify(user)); // Save initialized data
+    localStorage.setItem("user", JSON.stringify(user));
   }
 
   // DOM references
@@ -241,7 +240,7 @@ if (dashboardPage) {
       skillsList.appendChild(li);
     });
     updateStats();
-    localStorage.setItem("user", JSON.stringify(user)); // SAVE changes
+    localStorage.setItem("user", JSON.stringify(user));
   }
 
   function renderRecent() {
@@ -284,13 +283,23 @@ if (dashboardPage) {
     }
 
     closeModal();
-    renderSkills(); // Will update localStorage too
+    renderSkills();
   };
+  document.getElementById("save-skill").onclick = saveSkill;
 
   window.deleteSkill = function (id) {
+    const skill = user.skills.find(s => s.id === id);
+    if (!skill) return;
+
+    const confirmDelete = confirm(`Are you sure you want to delete "${skill.name}"?`);
+    if (!confirmDelete) return;
+
     user.skills = user.skills.filter(s => s.id !== id);
-    renderSkills(); // Will update localStorage too
+    renderSkills();
+    updateStats();
+    localStorage.setItem("user", JSON.stringify(user));
   };
+
 
   // ======= Add Skill Modal =======
   const addSkillBtn = document.getElementById("add-skill-btn");
@@ -332,7 +341,7 @@ if (dashboardPage) {
     user.skills.push(newSkill);
     addSkillForm.reset();
     addModal.style.display = "none";
-    renderSkills(); // Will update localStorage too
+    renderSkills();
   });
 
   // ======= Initial Load =======
@@ -357,10 +366,9 @@ const buySkillDetails = document.getElementById("buy-skill-details");
 const payNowBtn = document.getElementById("pay-now-btn");
 const paymentMsg = document.getElementById("payment-msg");
 
-// Load user's own skills from localStorage (dashboard uses same user.skills)
 const getUserSkills = () => {
   const userData = JSON.parse(localStorage.getItem("user"));
-  // fallback dummy
+
   return userData?.skills || [
     { id: 1, name: "Photography", desc: "Teach basics of DSLR", price: 20 },
     { id: 2, name: "Python", desc: "Intro to Python coding", price: 15 }
@@ -391,7 +399,7 @@ function renderMarketplace() {
     marketplaceCards.appendChild(card);
   });
 
-  // Attach events
+  
   document.querySelectorAll(".swap-btn").forEach(btn =>
     btn.addEventListener("click", onSwapClick)
   );
@@ -400,7 +408,7 @@ function renderMarketplace() {
   );
 }
 
-// Swap modal logic
+
 let selectedMarketplaceSkill = null;
 
 function onSwapClick(e) {
@@ -408,10 +416,8 @@ function onSwapClick(e) {
   selectedMarketplaceSkill = marketplaceSkills.find(s => s.id === skillId);
   if (!selectedMarketplaceSkill) return;
 
-  // Populate their skill dropdown (only the selected skill here)
   theirSkillSelect.innerHTML = `<option value="${selectedMarketplaceSkill.id}">${selectedMarketplaceSkill.name} (€${selectedMarketplaceSkill.price})</option>`;
 
-  // Populate your skills dropdown
   const userSkills = getUserSkills();
   yourSkillSelect.innerHTML = "";
   userSkills.forEach(s => {
@@ -424,10 +430,8 @@ function onSwapClick(e) {
   priceDiffMsg.textContent = "";
   swapConfirmBtn.disabled = true;
 
-  // Show modal
   swapModal.style.display = "flex";
 
-  // Listen to changes to calculate price diff
   yourSkillSelect.onchange = calculatePriceDiff;
   theirSkillSelect.onchange = calculatePriceDiff;
   calculatePriceDiff();
@@ -462,7 +466,6 @@ swapConfirmBtn.onclick = function () {
   swapModal.style.display = "none";
 };
 
-// Close modals on click
 swapClose.onclick = () => { swapModal.style.display = "none"; };
 buyClose.onclick = () => {
   buyModal.style.display = "none";
@@ -470,7 +473,6 @@ buyClose.onclick = () => {
   payNowBtn.style.display = "inline-block";
 };
 
-// Buy modal logic
 let selectedBuySkill = null;
 
 function onBuyClick(e) {
@@ -491,7 +493,7 @@ function onBuyClick(e) {
 }
 
 payNowBtn.onclick = function () {
-  // Dummy payment validation
+  
   const cardNum = document.getElementById("card-number").value.trim();
   const cardExp = document.getElementById("card-expiry").value.trim();
   const cardCvc = document.getElementById("card-cvc").value.trim();
@@ -508,7 +510,6 @@ payNowBtn.onclick = function () {
     payNowBtn.style.display = "none";
     paymentMsg.style.display = "block";
 
-    // Update localStorage user bought skills & earnings
     let user = JSON.parse(localStorage.getItem("user"));
     if (!user) user = { skills: [], exchanged: [], bought: [], earnings: 0 };
 
@@ -520,7 +521,6 @@ payNowBtn.onclick = function () {
 
     localStorage.setItem("user", JSON.stringify(user));
 
-    // Also update dashboard data if dashboard page open and relevant elements exist
     if (document.getElementById("bought-list") && document.getElementById("bought-count") && document.getElementById("total-earnings")) {
       document.getElementById("bought-list").innerHTML = user.bought.map(b => `<li>${b}</li>`).join('');
       document.getElementById("bought-count").textContent = user.bought.length;
@@ -536,14 +536,12 @@ payNowBtn.onclick = function () {
       document.getElementById("card-cvc").value = "";
     }, 2000);
 
-  }, 1500); // simulate payment delay
+  }, 1500); 
 };
 
-// Close modals when clicking outside modal-content
 window.onclick = function(event) {
   if (event.target === swapModal) swapModal.style.display = "none";
   if (event.target === buyModal) buyModal.style.display = "none";
 };
 
-// Initial render call
 renderMarketplace();
